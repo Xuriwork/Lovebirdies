@@ -1,38 +1,277 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Varela+Round|Bowlby+One+SC|Courgette|Fredoka+One|Francois+One|Lato&display=swap');
+* { list-style-type: none; padding: 0; margin: 0; }
+
+body {
+  font-family: 'Lato' !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+  height: 8vh;
+  width: 100%;
+  padding: 0 40px;
+  background-color: #fc85ae;
+  color: #fff;
+  font-family: "Courgette";
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header nav {
+  height: 100%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+header ul {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+header ul li {
+  margin-left: 40px;
+  font-size: 1.1em;
+}
+
+header ul li:nth-child(1) {
+  margin-left: 0px;
+}
+
+header div {
+  margin-left: auto;
+}
+
+header div button {
+  margin: 0 15px;
+  padding: 8px 30px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  font-family: "Lato";
+}
+
+header div button:hover {
+  background-color: rgb(230, 230, 230);
+}
+
+header div button:nth-child(2) {
+  background-color: rgb(179, 87, 130);
+  font-weight: 600;
+  color: #fff;
+}
+
+header div button:nth-child(2):hover {
+  background-color: rgb(214, 104, 155);
+}
+
+.hamburger {
+  display: none;
+}
+
+.hero-section {
+  height: 92vh;
+  background-color: rgb(235, 49, 136);
+}
+
+.hero-section-background {
+  height: 92vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url(./assets/images/WomanAndManHoneymoon.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.hero-section-background h1 {
+  font-size: 3.2em;
+  width: 800px;
+  font-family: "Fredoka One";
+}
+
+.hero-section-background h1 span {
+  font-family: "Fredoka One";
+}
+
+.hero-section-background h1 p {
+  font-size: 0.4em;
+  font-family: Lato;
+  line-height: 1.6;
+}
+
+h1 span {
+  color: rgb(255, 35, 101);
+}
+
+.information-section {
+  height: auto;
+  width: 100%;
+  padding: 80px 0;
+  background-color: #fc85ae;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  grid-row-gap: 20px;
+  justify-items: center;
+  align-items: center;
+}
+
+.information-section > div {
+  width: 400px;
+  height: 250px;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.information-section img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+
+.information-text {
+  margin-left: 30px;
+}
+
+.information-text h5 {
+  font-weight: bold;
+}
+
+.information-text p:nth-of-type(2) {
+  color: #ff2365;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.footer {
+  line-height: 3vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.footer h1 {
+  font-size: 1em;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+
+* {
+  font-family: Roboto;
+}
+
+section {
+  width: 100%;
+  display: inline-block;
+  background: #ccc;
+  height: 60vh;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.footer-distributed {
+  background-color: #303a52;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  width: 100%;
+  text-align: left;
+  font: normal 16px sans-serif;
+  padding: 45px 50px;
+}
+
+.footer-distributed .footer-left p {
+  color: #8f9296;
+  font-size: 14px;
+  margin: 0;
+}
+/* Footer links */
+
+.footer-distributed p.footer-links {
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  margin: 0 0 10px;
+  padding: 0;
+  transition: ease .25s;
+}
+
+.footer-distributed p.footer-links a {
+  display: inline-block;
+  line-height: 1.8;
+  text-decoration: none;
+  color: inherit;
+  transition: ease .25s;
+  margin: 5px;
+}
+
+.footer-distributed .footer-right {
+  float: right;
+  margin-top: 6px;
+  max-width: 180px;
+}
+
+.footer-distributed .footer-right a {
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-color: #364f6b;
+  border-radius: 2px;
+  font-size: 20px;
+  color: #ffffff;
+  text-align: center;
+  line-height: 35px;
+  margin-left: 3px;
+  transition:all .25s;
+}
+
+.footer-distributed .footer-right a:hover{transform:scale(1.1); -webkit-transform:scale(1.1);}
+
+.footer-distributed p.footer-links a:hover{color: #f74077;}
+
+/* Media Queries */
+
+@media (max-width: 750px) {
+
+  .hamburger {
+    display: block;
+    margin-left: auto;
   }
-  to {
-    transform: rotate(360deg);
+
+  header nav {
+    display: flex;
+  }
+
+  header ul {
+    display: none;
+  }
+
+  .hero-section-background h1 {
+    font-size: 2.5em;
+    width: 100%;
+  }  
+
+  .information-section {
+    padding: 20px 0;
+  }
+
+
+}
+
+@media (max-width: 600px) {
+  .footer-distributed .footer-left, .footer-distributed .footer-right {
+    text-align: center;
+  }
+  .footer-distributed .footer-right {
+    float: none;
+    margin: 0 auto 20px;
+  }
+  .footer-distributed .footer-left p.footer-links {
+    line-height: 1.8;
   }
 }
