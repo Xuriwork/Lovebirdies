@@ -1,43 +1,162 @@
 @import url('https://fonts.googleapis.com/css?family=Varela+Round|Bowlby+One+SC|Courgette|Fredoka+One|Francois+One|Lato&display=swap');
-* { list-style-type: none; padding: 0; margin: 0; }
+* { list-style-type: none; padding: 0; margin: 0; box-sizing: border-box; text-decoration: none; }
 
 body {
   font-family: 'Lato' !important;
 }
 
-header {
+.header {
   height: 8vh;
   width: 100%;
-  padding: 0 40px;
   background-color: #fc85ae;
   color: #fff;
-  font-family: "Courgette";
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
   align-items: center;
+  align-content: center;
+  padding: 30px 5%;
 }
 
-header nav {
+nav {
+  display: flex;
   height: 100%;
+}
+
+.logo {
+  cursor: pointer;
+  margin-right: auto;
+  width: 50px;
+}
+
+.nav__links a,
+.cta,
+.overlay__content a {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  color: #edf0f1;
+  text-decoration: none;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+}
+
+.nav__links li {
+  padding: 0px 30px;
+}
+
+header span {
+  cursor: pointer;
+}
+
+.nav__links li span {
+  font-family: "Courgette";
+}
+
+.signin-button, 
+.signin-button:hover {
+  margin-left: auto;
+  color: #fff;
+  font-family: "Varela Round";
+}
+
+.signin-button:hover, 
+.signup-button:hover {
+  text-decoration: none;
+}
+
+.signup-button {
+  padding: 9px 30px;
+  background-color: #fff;
+  color: rgb(214, 104, 155);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  margin-left: 20px;
+  font-family: "Varela Round";
+}
+
+.signup-button:hover {
+  background-color: rgb(243, 74, 153);
+  color: #fff;
+}
+
+/* Mobile Nav */
+
+.menu {
+  display: none;
+}
+
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  background-color: #24252a;
+  overflow-x: hidden;
+  transition: all 0.5s ease 0s;
+}
+
+#mobile_menu {
+  width: 0;
+}
+
+.overlay__content {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.overlay a {
+  padding: 15px;
+  font-size: 36px;
+  display: block;
+  transition: all 0.3s ease 0s;
+}
+
+
+.overlay .close {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  color: #edf0f1;
+}
+
+/* Media Queries for Overlay */
+
+@media screen and (max-height: 450px) {
+  .overlay a {
+    font-size: 20px;
+  }
+  .overlay .close {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .nav__links,
+  .cta {
+    display: none;
+  }
+  .menu {
+    display: initial;
+  }
 }
 
 header ul {
   height: 100%;
   display: flex;
   align-items: center;
-}
-
-header ul li {
-  margin-left: 40px;
-  font-size: 1.1em;
-}
-
-header ul li:nth-child(1) {
-  margin-left: 0px;
-}
-
-header div {
-  margin-left: auto;
 }
 
 header div button {
@@ -47,20 +166,6 @@ header div button {
   border-radius: 10px;
   background-color: #fff;
   font-family: "Lato";
-}
-
-header div button:hover {
-  background-color: rgb(230, 230, 230);
-}
-
-header div button:nth-child(2) {
-  background-color: rgb(179, 87, 130);
-  font-weight: 600;
-  color: #fff;
-}
-
-header div button:nth-child(2):hover {
-  background-color: rgb(214, 104, 155);
 }
 
 .hamburger {
@@ -107,7 +212,37 @@ h1 span {
   height: auto;
   width: 100%;
   padding: 80px 0;
+  padding-bottom: 80px !important;
   background-color: #fc85ae;
+}
+
+.information-section-text-box {
+  text-align: center;
+  color: #fff;
+}
+
+.information-section-text-box h1 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.information-section-text-box p {
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+hr { 
+  overflow: hidden;
+  border-style: inset;
+  border: none;
+  width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #49225f4f;
+  margin-bottom: 70px !important;
+}
+
+.information-section-info-boxes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
   grid-row-gap: 20px;
@@ -115,7 +250,7 @@ h1 span {
   align-items: center;
 }
 
-.information-section > div {
+.information-section-info-boxes > div {
   width: 400px;
   height: 250px;
   background-color: #fff;
@@ -201,7 +336,7 @@ section {
   transition: ease .25s;
 }
 
-.footer-distributed p.footer-links a {
+.footer-distributed p.footer-links span {
   display: inline-block;
   line-height: 1.8;
   text-decoration: none;
@@ -216,7 +351,7 @@ section {
   max-width: 180px;
 }
 
-.footer-distributed .footer-right a {
+.footer-distributed .footer-right span {
   display: inline-block;
   width: 35px;
   height: 35px;
@@ -230,17 +365,21 @@ section {
   transition:all .25s;
 }
 
-.footer-distributed .footer-right a:hover{transform:scale(1.1); -webkit-transform:scale(1.1);}
+.footer-distributed .footer-right span:hover{transform:scale(1.1); -webkit-transform:scale(1.1); cursor: pointer;}
 
-.footer-distributed p.footer-links a:hover{color: #f74077;}
+.footer-distributed p.footer-links span:hover{color: #f74077; cursor: pointer;}
 
-/* Media Queries */
+/* Main Media Queries */
 
 @media (max-width: 750px) {
 
   .hamburger {
     display: block;
     margin-left: auto;
+  }
+
+  .signin-button, .signup-button {
+    display: none;
   }
 
   header nav {
@@ -260,7 +399,6 @@ section {
     padding: 20px 0;
   }
 
-
 }
 
 @media (max-width: 600px) {
@@ -274,4 +412,113 @@ section {
   .footer-distributed .footer-left p.footer-links {
     line-height: 1.8;
   }
+}
+
+/* SignUp.js & SignIn.js */
+
+legend {
+  font-family: "Varela Round";
+}
+
+.form-page-background {
+  background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-box{
+	max-width: 500px;
+	background: #f4f7f8;
+	padding: 20px;
+	background: #f4f7f8;
+	border-radius: 8px;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+.form-box fieldset{
+	border: none;
+}
+.form-box legend {
+	font-size: 1.4em;
+	margin-bottom: 10px;
+}
+.form-box label {
+	display: block;
+	margin-bottom: 8px;
+}
+.form-box input,
+.form-box textarea,
+.form-box select {
+	font-family: "Varela Round";
+	background: rgba(255,255,255,.1);
+	border: none;
+	border-radius: 4px;
+	font-size: 15px;
+	margin: 0;
+	outline: 0;
+	padding: 10px;
+	width: 100%;
+	box-sizing: border-box; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box; 
+	background-color: #e8eeef;
+	color:#8a97a0;
+	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+	margin-bottom: 30px;
+}
+.form-box input[type="text"]:focus,
+.form-box input[type="email"]:focus,
+.form-box input[type="password"]:focus,
+.form-box input[type="date"]:focus,
+.form-box textarea:focus,
+.form-box select:focus{
+	background: #d2d9dd;
+}
+
+.form-box .number {
+	background: #ff2365;
+	color: #fff;
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	font-size: 0.8em;
+	margin-right: 4px;
+	line-height: 30px;
+	text-align: center;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+	border-radius: 50%;
+}
+
+.form-box input[type="submit"],
+.form-box input[type="button"] {
+	position: relative;
+	display: block;
+	padding: 19px 39px 18px 39px;
+	color: #FFF;
+	margin: 0 auto;
+	background: #ff2365;
+	font-size: 18px;
+	text-align: center;
+	font-style: normal;
+	width: 100%;
+	border: 1px solid #ad2d53;
+	border-width: 1px 1px 3px;
+	margin-bottom: 10px;
+}
+
+.form-box input[type="submit"]:hover,
+.form-box input[type="button"]:hover {
+	background: #d31b52;
+}
+
+.back-button {
+  background-color: #fff !important;
+  color: #24252a !important;
+  border: 1px solid #d31e54 !important;
+  border-width: 1px 1px 3px !important;
 }

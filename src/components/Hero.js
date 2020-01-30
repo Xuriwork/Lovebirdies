@@ -18,28 +18,42 @@ export default class Hero extends Component {
                     </h1>
                 </div>
                 <div className="information-section">
-                    <div>
-                        <img src={rose} alt="Rose"/>
-                        <div className="information-text">
-                            <h5>Lorem ipsum dolor sit amet</h5>
-                            <p>Voluptatem iure aliquid neque earum tempore beatae quo totam deserunt.</p>
-                            <p>Learn more <i className="fa fa-long-arrow-right" /></p>
-                        </div>
+                    <div className="information-section-text-box">
+                        <h1>
+                            Meet the one
+                        </h1>
+                        <p>
+                            Vitae semper quis lectus nulla cras sed
+                            purus viverra accumsan in nisl <br /> 
+                            venenatis felis eget.
+                            Non nisi est sit amet facilisis magna etiam.
+                        </p>
+                        <hr />
                     </div>
-                    <div>
-                        <img src={lovepotion} alt="Love Potion"/>
-                        <div className="information-text">
-                            <h5>Lorem ipsum dolor sit amet</h5>
-                            <p>Voluptatem iure aliquid neque earum tempore beatae quo totam deserunt.</p>
-                            <p>Learn more <i className="fa fa-long-arrow-right" /></p>
+                    <div className="information-section-info-boxes">
+                        <div>
+                            <img src={rose} alt="Rose"/>
+                            <div className="information-text">
+                                <h5>Lorem ipsum dolor sit amet</h5>
+                                <p>Voluptatem iure aliquid neque earum tempore beatae quo totam deserunt.</p>
+                                <p>Learn more <i className="fa fa-long-arrow-right" /></p>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <img src={phonecall} alt="Date"/>
-                        <div className="information-text">
-                            <h5>Lorem ipsum dolor sit amet</h5>
-                            <p>Voluptatem iure aliquid neque earum tempore beatae quo totam deserunt.</p>
-                            <p>Learn more <i className="fa fa-long-arrow-right" /></p>
+                        <div>
+                            <img src={lovepotion} alt="Love Potion"/>
+                            <div className="information-text">
+                                <h5>Lorem ipsum dolor sit amet</h5>
+                                <p>Voluptatem iure aliquid neque earum tempore beatae quo totam deserunt.</p>
+                                <p>Learn more <i className="fa fa-long-arrow-right" /></p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src={phonecall} alt="Date"/>
+                            <div className="information-text">
+                                <h5>Lorem ipsum dolor sit amet</h5>
+                                <p>Voluptatem iure aliquid neque earum tempore beatae quo totam deserunt.</p>
+                                <p>Learn more <i className="fa fa-long-arrow-right" /></p>
+                            </div>
                         </div>
                     </div>
                 </div>
