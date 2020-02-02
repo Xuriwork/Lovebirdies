@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Select from 'react-select';
+import FormError from './FormError';
 
 export class FormPage2 extends Component {
     state = {
@@ -27,16 +28,23 @@ export class FormPage2 extends Component {
 
         return (
         <div className="form-page-background">
-            <div className="form-box" style={{ width: '500px' }}>
+            <div className="form-box form-page-1" style={{ width: '500px' }}>
                 <form>
                     <fieldset>
                         <legend><span className="number">{values.step}</span> Registration</legend>
+                        { 
+                            values.errorMessage !== null ? (
+                            <FormError errorMessage={values.errorMessage} />
+                            ) : null 
+                        }
                         <label htmlFor="sq1">Security Question #1</label>
                         <Select 
                             options={this.options} 
                             onChange={handleChangeForSelect('security1')}
                             defaultValue={values.security1}
-                            name="sq1"
+                            name="sq1" 
+                            style={{ marginBottom: '0' }} 
+                            className="select"
                         />  
                         <label htmlFor="sq2">Security Question #2</label>
                         <Select 
@@ -62,7 +70,7 @@ export class FormPage2 extends Component {
                     <input 
                         onClick={this.continue} 
                         type="submit" 
-                        value="Confirm" 
+                        value="Continue" 
                     />
                 </form>
             </div>

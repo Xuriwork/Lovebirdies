@@ -1,98 +1,139 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
+import { navigate } from '@reach/router';
+import firebase from '../../Firebase';
+import FormError from './FormError';
 
 export class ConfirmPage extends Component {
-    state = {
-        isDisabled: true,
-    };
-
-    toggleDisabled = () =>
-        this.setState(state => ({ isDisabled: true }));
-
+constructor(props) {
+    super(props);
+    this.state = {
+        errorMessage: null, 
+    }
+}
+    
     back = e => {
         e.preventDefault();
         this.props.prevStep();
     };
 
-    confirm = e => {
+    continue = e => {
         e.preventDefault();
-        this.props.nextStep();
-    };
+        const { values } = this.props;
+        
+        firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
+        .then((user) => {
+
+            const userInfo = {
+                userID: user.uid,
+                name: values.name,
+                email: values.email,
+                phone_number: values.phone_number,
+                home_address: values.home_address,
+                birthdate: values.birthdate,
+                security1: values.security1,
+                security2: values.security2,
+                security3: values.security3
+            };
+            
+            console.log('Email: ' + values.email + ' Password: ' + values.password);
+            console.log("Sign Up Success!");
+            navigate('/profile');
+            firebase.firestore()
+            .collection('users')
+            .doc(user.user.uid)
+            .set(userInfo)
+            .then(() => {
+                console.log('Added user info to the Firestore Database');
+            })
+            .catch((err) => {
+                this.setState({ errorMessage: 'Firestore error: ' + err });
+            });
+            this.props.nextStep();
+        })
+        .catch((err) => {
+            this.setState({ errorMessage: err.toString(err) });
+        });
+    }; 
 
     render() {
-        const { isDisabled } = this.state;
-        const { values } = this.props;
+        const { values, errorMessage } = this.props;
         
         return (
         <div className="form-page-background" style={{ height: 'auto', padding: '20px 0' }}>
-            <div className="form-box">
-                <form>
+            <div className="form-box form-page-1" style={{ width: '500px' }}>
+                <form onSubmit={this.signUp}>
                     <fieldset>
                         <legend><span className="number">{values.step}</span>Confirm Information</legend>
+                        { 
+                            errorMessage !== null ? (
+                            <FormError errorMessage={this.state.errorMessage} />
+                            ) : null 
+                        }
+                        <label>Name</label>
                         <input 
                             disabled
                             defaultValue={values.name} 
                             type="text" 
                             name="name" 
-                            placeholder="Your Name *"
+                            placeholder="Your Name"
                         />
+                        <label>Your Email Address</label>
                         <input 
                             disabled
                             defaultValue={values.email} 
                             type="email" 
                             name="email" 
-                            placeholder="Your Email *"
-                        />
+                            placeholder="Your Email Address"
+                        /> 
+                        <label>Password</label>
                         <input 
                             disabled
                             defaultValue={values.password} 
-                            type="password" 
+                            type="text" 
                             name="password" 
-                            placeholder="Password *"
-                        />
+                            placeholder="Password"
+                        /> 
+                        <label>Phone Number</label>
                         <input 
                             disabled
                             defaultValue={values.phone_number} 
                             type="number" 
                             name="phone_number" 
-                            placeholder="Your Phone Number *"
-                        />
+                            placeholder="Your Phone Number"
+                        /> 
+                        <label>Home Address</label>
                         <input 
                             disabled
                             defaultValue={values.home_address} 
                             type="text" 
                             name="home_address" 
-                            placeholder="Your Home Address *"/>
+                            placeholder="Your Home Address"
+                        /> 
+                        <label>Birthdate</label>
                         <input 
                             disabled
                             defaultValue={values.birthdate} 
                             type="date" 
                             name="birthdate" 
                             max="2002-01-01"
-                        />    
+                        /> 
                     </fieldset>
                     <fieldset>
                         <label htmlFor="security1">Security Question #1</label>
-                        <Select 
-                            defaultValue={values.security1}
-                            isDisabled={isDisabled}
-                            options={this.options} 
-                            name="security1" 
-                        />
+                        <input 
+                            disabled
+                            defaultValue={values.security1.label}
+                        />  
                         <label htmlFor="security2">Security Question #2</label>
-                        <Select 
-                            defaultValue={values.security2}
-                            isDisabled={isDisabled}
-                            options={this.options} 
-                            name="security2"
-                        />
+                        <input 
+                            disabled
+                            defaultValue={values.security2.label}
+                        />  
                         <label htmlFor="security3">Security Question #3</label>
-                        <Select 
-                            defaultValue={values.security3}
-                            isDisabled={isDisabled}
-                            options={this.options}
-                            name="security3"
-                        />   
+                        <input 
+                            disabled
+                            defaultValue={values.security3.label}
+                        />  
                     </fieldset>
                     <input 
                         onClick={this.back} 
@@ -100,9 +141,9 @@ export class ConfirmPage extends Component {
                         className="back-button"  
                     />
                     <input 
-                        onClick={this.confirm} 
                         type="submit" 
-                        value="Confirm & Continue"     
+                        value="Sign Up" 
+                        onClick={this.continue}
                     />
                 </form>
             </div>

@@ -1,11 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link } from '@reach/router';
 import '../App.css';
 import Hamburger from '../assets/images/icons/icons8-menu.svg';
-import heartIcon from '../assets/images/icons/logo192.png'
+import heartIcon from '../assets/images/icons/logo192.png';
 
-function Navbar() {
-
+class Navbar extends Component {
+    
+    render() {
+          
         return (
             <div>
                 <header className="header">
@@ -13,7 +15,8 @@ function Navbar() {
                         <img className="logo" src={heartIcon} alt="logo" />
                     </Link>
                     <nav>
-                        <ul className="nav__links">
+                        <ul className="nav-links">
+                            <li><span></span></li>
                             <li><span>About</span></li>
                             <li><span>Blog</span></li>
                             <li><span>Testimonials</span></li>
@@ -24,9 +27,9 @@ function Navbar() {
                     <Link to="/signup" className="signup-button">Sign Up</Link>
                     <img src={Hamburger} className="hamburger" alt="Hamburger Menu" />
                 </header>
-                <div id="mobile_menu" className="overlay">
+                <div id="mobile-menu" className="overlay">
                     <span className="close">&times;</span>
-                    <div className="overlay__content">
+                    <div className="overlay-content">
                         <span>About</span>
                         <span>Blog</span>
                         <span>Testimonials</span>
@@ -35,6 +38,7 @@ function Navbar() {
                 </div>
             </div>
         )
+    }
 }
 
 export default Navbar;

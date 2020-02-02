@@ -1,10 +1,10 @@
 import React from 'react';
-import '../App.css';
+import '../../App.css';
 
 function SignIn() {
         return (
-        <div class="form-page-background">
-            <div class="form-box">
+        <div className="form-page-background">
+            <div className="form-box form-page-1 input-margin">
                 <form>
                     <fieldset>
                         <legend>Sign In</legend>

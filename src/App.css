@@ -2,7 +2,7 @@
 * { list-style-type: none; padding: 0; margin: 0; box-sizing: border-box; text-decoration: none; }
 
 body {
-  font-family: 'Lato' !important;
+  font-family: "Varela Round";
 }
 
 .header {
@@ -29,30 +29,28 @@ nav {
   width: 50px;
 }
 
-.nav__links a,
-.cta,
-.overlay__content a {
-  font-family: "Montserrat", sans-serif;
+.overlay-content a {
   font-weight: 500;
   color: #edf0f1;
   text-decoration: none;
 }
 
-.nav__links {
+.nav-links {
   list-style: none;
   display: flex;
 }
 
-.nav__links li {
+.nav-links li {
   padding: 0px 30px;
 }
 
 header span {
+  font-family: "Courgette";
   cursor: pointer;
 }
 
-.nav__links li span {
-  font-family: "Courgette";
+header span:hover {
+  color: #ad2d53;
 }
 
 .signin-button, 
@@ -102,11 +100,11 @@ header span {
   transition: all 0.5s ease 0s;
 }
 
-#mobile_menu {
+#mobile-menu {
   width: 0;
 }
 
-.overlay__content {
+.overlay-content {
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -144,10 +142,7 @@ header span {
 }
 
 @media only screen and (max-width: 800px) {
-  .nav__links,
-  .cta {
-    display: none;
-  }
+  .nav-links,
   .menu {
     display: initial;
   }
@@ -165,7 +160,6 @@ header div button {
   border: none;
   border-radius: 10px;
   background-color: #fff;
-  font-family: "Lato";
 }
 
 .hamburger {
@@ -202,6 +196,7 @@ header div button {
   font-size: 0.4em;
   font-family: Lato;
   line-height: 1.6;
+
 }
 
 h1 span {
@@ -224,11 +219,14 @@ h1 span {
 .information-section-text-box h1 {
   margin-top: 0;
   margin-bottom: 0;
+  font-family: "Varela Round";
 }
 
 .information-section-text-box p {
   margin-top: 5px;
   margin-bottom: 25px;
+  font-family: "Varela Round";
+  font-weight: 100;
 }
 
 hr { 
@@ -365,9 +363,16 @@ section {
   transition:all .25s;
 }
 
-.footer-distributed .footer-right span:hover{transform:scale(1.1); -webkit-transform:scale(1.1); cursor: pointer;}
+.footer-distributed .footer-right span:hover { 
+  transform:scale(1.1); 
+  -webkit-transform:scale(1.1); 
+  cursor: pointer;
+}
 
-.footer-distributed p.footer-links span:hover{color: #f74077; cursor: pointer;}
+.footer-distributed p.footer-links span:hover { 
+  color: #f74077; 
+  cursor: pointer;
+}
 
 /* Main Media Queries */
 
@@ -376,6 +381,10 @@ section {
   .hamburger {
     display: block;
     margin-left: auto;
+  }
+
+  .nav-links {
+    display: none;
   }
 
   .signin-button, .signup-button {
@@ -399,6 +408,15 @@ section {
     padding: 20px 0;
   }
 
+  .success-page h1, .success-page p{
+    font-family: "Francois One" !important;
+    font-size: 2em !important;
+  }
+
+  .success-page p{
+    font-size: 1.2em !important;
+  }
+
 }
 
 @media (max-width: 600px) {
@@ -418,6 +436,16 @@ section {
 
 legend {
   font-family: "Varela Round";
+}
+
+.error-message {
+  color: #fff;
+  background-color: rgb(245, 109, 136);
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1.1em !important;
+  margin-top: 5px !important;
+  margin-bottom: 20px !important;
 }
 
 .form-page-background {
@@ -450,11 +478,13 @@ legend {
 	display: block;
 	margin-bottom: 8px;
 }
-.form-box input,
-.form-box textarea,
-.form-box select {
+
+.form-page-1 input,
+.form-page-1 textarea,
+.form-page-1 select,
+.profile-form input, 
+textarea {
 	font-family: "Varela Round";
-	background: rgba(255,255,255,.1);
 	border: none;
 	border-radius: 4px;
 	font-size: 15px;
@@ -465,12 +495,26 @@ legend {
 	box-sizing: border-box; 
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box; 
-	background-color: #e8eeef;
+  background-color: #e8eeef;
 	color:#8a97a0;
 	-webkit-box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-	box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
-	margin-bottom: 30px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
 }
+
+.form-page-2 .form-box input {
+  margin-bottom: 0px;
+}
+
+.input-margin input {
+  margin-bottom: 30px;
+}
+
+.form-page-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .form-box input[type="text"]:focus,
 .form-box input[type="email"]:focus,
 .form-box input[type="password"]:focus,
@@ -495,12 +539,12 @@ legend {
 }
 
 .form-box input[type="submit"],
-.form-box input[type="button"] {
+.form-box input[type="button"],
+.success-page button {
 	position: relative;
 	display: block;
 	padding: 19px 39px 18px 39px;
 	color: #FFF;
-	margin: 0 auto;
 	background: #ff2365;
 	font-size: 18px;
 	text-align: center;
@@ -521,4 +565,80 @@ legend {
   color: #24252a !important;
   border: 1px solid #d31e54 !important;
   border-width: 1px 1px 3px !important;
+  margin-top: 20px !important;
+}
+
+/* SuccessPage.js */
+
+.success-page {
+  flex-direction: column;
+  color: #fff;
+  text-align: center;
+}
+
+.success-page h1, .success-page p {
+  font-family: "Francois One";
+  font-size: 3.5em;
+}
+
+.success-page h1{
+  color: #d31b52;
+}
+
+.success-page p {
+  font-size: 1.8em;
+}
+
+/* YourProfile.js */
+
+.textarea {
+  resize: none;
+}
+
+.profile-page {
+  height: 92vh;
+  background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
+}
+
+.profile-form {
+  display: grid;
+  grid-template-columns: 0.5fr 1fr 0.5fr;
+  align-items: center;
+  justify-items: center;
+  height: 100%;
+}
+
+.profile-form > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #24252a;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.profile-form > div:nth-child(2) {
+  background-color: #38393f;
+}
+
+.profile-form input {
+  width: 80%;
+  max-width: 300px;
+}
+
+.profile-form img {
+  background-color: #ad2d53;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.profile-form button {
+  padding: 5px 30px;
+  background-color: #fccde2;
+  border-radius: 5px;
+  border: none;
+  margin-top: 10px;
 }
