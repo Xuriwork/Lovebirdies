@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { navigate } from '@reach/router';
 import firebase from '../../Firebase';
+import { navigate } from '@reach/router';
 import FormError from './FormError';
 
 export class ConfirmPage extends Component {
@@ -20,7 +20,9 @@ constructor(props) {
         e.preventDefault();
         const { values } = this.props;
         
-        firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
+        firebase
+        .auth()
+        .createUserWithEmailAndPassword(values.email, values.password)
         .then((user) => {
 
             const userInfo = {
@@ -37,10 +39,9 @@ constructor(props) {
             
             console.log('Email: ' + values.email + ' Password: ' + values.password);
             console.log("Sign Up Success!");
-            navigate('/profile');
             firebase.firestore()
             .collection('users')
-            .doc(user.user.uid)
+            .doc(user.user.email)
             .set(userInfo)
             .then(() => {
                 console.log('Added user info to the Firestore Database');
@@ -48,15 +49,16 @@ constructor(props) {
             .catch((err) => {
                 this.setState({ errorMessage: 'Firestore error: ' + err });
             });
+            navigate('/profile')
             this.props.nextStep();
         })
         .catch((err) => {
-            this.setState({ errorMessage: err.toString(err) });
+            this.setState({ errorMessage: err.message });
         });
     }; 
 
     render() {
-        const { values, errorMessage } = this.props;
+        const { values } = this.props;
         
         return (
         <div className="form-page-background" style={{ height: 'auto', padding: '20px 0' }}>
@@ -64,11 +66,7 @@ constructor(props) {
                 <form onSubmit={this.signUp}>
                     <fieldset>
                         <legend><span className="number">{values.step}</span>Confirm Information</legend>
-                        { 
-                            errorMessage !== null ? (
-                            <FormError errorMessage={this.state.errorMessage} />
-                            ) : null 
-                        }
+                        <FormError errorMessage={this.state.errorMessage} />
                         <label>Name</label>
                         <input 
                             disabled

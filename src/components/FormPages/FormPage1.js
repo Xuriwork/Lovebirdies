@@ -15,12 +15,8 @@ export class FormPage1 extends Component {
             <div className="form-box form-page-1 input-margin">
                 <form>
                     <fieldset>
-                        <legend><span className="number">{values.step}</span> Registration</legend>
-                        { 
-                            values.errorMessage !== null ? (
-                            <FormError errorMessage={values.errorMessage}  />
-                            ) : null
-                        }
+                        <legend><span className="number">{values.step}</span> Registration</legend> 
+                        <FormError errorMessage={values.errorMessage}  />
                         <input 
                             required
                             onChange={handleChange('name')} 
@@ -81,7 +77,7 @@ export class FormPage1 extends Component {
                     <input 
                         onClick={this.continue} 
                         type="submit" 
-                        value="Continue"     
+                        value="Continue"   
                     />
                 </form>
             </div>
@@ -90,4 +86,4 @@ export class FormPage1 extends Component {
     }
 }
 
-export default FormPage1
+export default FormPage1;

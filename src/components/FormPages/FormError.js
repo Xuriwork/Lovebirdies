@@ -2,12 +2,19 @@ import React, { Component } from 'react'
 
 export class FormError extends Component {
     render() {
-        const {errorMessage} = this.props;
+        const {errorMessage, successMessage} = this.props;
 
         return (
-            <legend className="error-message">
-                {errorMessage}
-            </legend>
+            errorMessage !== null ? (
+                <div>
+                    <legend className="error-message">
+                        {errorMessage}
+                    </legend> 
+                    <legend className="error-message success-message">
+                        {successMessage}
+                    </legend>
+                </div>
+            ) : null    
         );
     }
 }

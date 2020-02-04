@@ -376,7 +376,7 @@ section {
 
 /* Main Media Queries */
 
-@media (max-width: 750px) {
+@media (max-width: 800px) {
 
   .hamburger {
     display: block;
@@ -446,6 +446,10 @@ legend {
   font-size: 1.1em !important;
   margin-top: 5px !important;
   margin-bottom: 20px !important;
+}
+
+.success-message {
+  background-color: #16d68a;
 }
 
 .form-page-background {

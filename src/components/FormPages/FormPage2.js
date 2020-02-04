@@ -3,6 +3,7 @@ import Select from 'react-select';
 import FormError from './FormError';
 
 export class FormPage2 extends Component {
+
     state = {
       selectValues: { label: this.props.val, value: this.props.val },
     }
@@ -12,7 +13,6 @@ export class FormPage2 extends Component {
         { label: 'Answer 2', value: 2 },
         { label: 'Answer 3', value: 3 },
     ]
-
     continue = e => {
         e.preventDefault();
         this.props.nextStep();
@@ -31,12 +31,8 @@ export class FormPage2 extends Component {
             <div className="form-box form-page-1" style={{ width: '500px' }}>
                 <form>
                     <fieldset>
-                        <legend><span className="number">{values.step}</span> Registration</legend>
-                        { 
-                            values.errorMessage !== null ? (
-                            <FormError errorMessage={values.errorMessage} />
-                            ) : null 
-                        }
+                        <legend><span className="number">{values.step}</span> Registration</legend>     
+                        <FormError errorMessage={values.errorMessage} />
                         <label htmlFor="sq1">Security Question #1</label>
                         <Select 
                             options={this.options} 

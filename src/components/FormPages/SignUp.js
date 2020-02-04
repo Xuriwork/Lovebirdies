@@ -24,12 +24,10 @@ constructor(props) {
         security3: '',
     }
 
-//  this.authListener = this.authListener.bind(this);
     this.handleChange = this.handleChange.bind(this);
     
 }
 
-    // Handles field changes
     handleChange = input => e => {
         this.setState({ [input]: e.target.value }, () => {
             if(this.state.password !== this.state.confirm_password) {

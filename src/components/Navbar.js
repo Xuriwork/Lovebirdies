@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
+import firebase from '../Firebase';
+import { navigate } from '@reach/router';
 import { Link } from '@reach/router';
 import '../App.css';
 import Hamburger from '../assets/images/icons/icons8-menu.svg';
 import heartIcon from '../assets/images/icons/logo192.png';
 
 class Navbar extends Component {
-    
+
+    signOut = e => {
+        firebase.auth().signOut().then(() => {
+            navigate('/home');
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
+
     render() {
           
         return (
@@ -23,8 +33,16 @@ class Navbar extends Component {
                             <li><span>Gallery</span></li>
                         </ul>
                     </nav>
-                    <Link to="/signin" className="signin-button">Sign In</Link>
-                    <Link to="/signup" className="signup-button">Sign Up</Link>
+                    { this.props.user == null ? (
+                    <React.Fragment>
+                        <Link to="/signin" className="signin-button" style={{ marginLeft: 'auto' }}>Sign In</Link>
+                        <Link to="/signup" className="signup-button">Sign Up</Link>
+                    </React.Fragment>
+                    ) : 
+                    <React.Fragment>
+                        <button className="signup-button" style={{ marginLeft: 'auto' }} onClick={this.signOut}>Sign Out</button>
+                    </React.Fragment>
+                    }
                     <img src={Hamburger} className="hamburger" alt="Hamburger Menu" />
                 </header>
                 <div id="mobile-menu" className="overlay">
