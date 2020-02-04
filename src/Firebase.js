@@ -3,14 +3,14 @@ import '@firebase/firestore';
 import '@firebase/auth';
 
   const firebaseConfig = {
-    apiKey: "AIzaSyDwyXCu1l4_PwPldig0z824Jts6PoxW4Js",
-    authDomain: "lovebirds-demo.firebaseapp.com",
-    databaseURL: "https://lovebirds-demo.firebaseio.com",
-    projectId: "lovebirds-demo",
-    storageBucket: "lovebirds-demo.appspot.com",
-    messagingSenderId: "177521573095",
-    appId: "1:177521573095:web:22dd538dd64ed8fd5c7642",
-    measurementId: "G-ZVXT3G12XX"
+    apiKey: "Add_Your_Creds",
+    authDomain: "Add_Your_Creds",
+    databaseURL: "Add_Your_Creds",
+    projectId: "Add_Your_Creds",
+    storageBucket: "Add_Your_Creds",
+    messagingSenderId: "Add_Your_Creds",
+    appId: "Add_Your_Creds",
+    measurementId: "Add_Your_Creds"
   };
 
   firebase.initializeApp(firebaseConfig);
