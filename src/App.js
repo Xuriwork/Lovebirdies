@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import Gallery from './components/Gallery';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
 import SignUp from './components/FormPages/SignUp';
 import SignIn from './components/FormPages/SignIn';
@@ -98,6 +100,8 @@ componentDidMount() {
 const Home = () => (
   <div>
     <Hero />
+    <Gallery />
+    <Contact />
     <Footer />
   </div>
 );

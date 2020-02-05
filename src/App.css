@@ -486,8 +486,9 @@ legend {
 .form-page-1 input,
 .form-page-1 textarea,
 .form-page-1 select,
-.profile-form input, 
-textarea {
+.profile-form input,
+textarea,
+.contact-section input {
 	font-family: "Varela Round";
 	border: none;
 	border-radius: 4px;
@@ -543,8 +544,8 @@ textarea {
 }
 
 .form-box input[type="submit"],
-.form-box input[type="button"],
-.success-page button {
+.success-page button,
+.contact-section input[type="submit"] {
 	position: relative;
 	display: block;
 	padding: 19px 39px 18px 39px;
@@ -559,8 +560,7 @@ textarea {
 	margin-bottom: 10px;
 }
 
-.form-box input[type="submit"]:hover,
-.form-box input[type="button"]:hover {
+.form-box input[type="submit"]:hover, .contact-section input[type="submit"]:hover {
 	background: #d31b52;
 }
 
@@ -645,4 +645,74 @@ textarea {
   border-radius: 5px;
   border: none;
   margin-top: 10px;
+}
+
+.gallery-section {
+  height: auto;
+  margin: 10px;
+}
+
+.gallery-container {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-auto-rows: 40vh;
+  height: 100%;
+  grid-auto-flow: dense;
+}
+
+.gallery-container > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  color: #ffeead;
+}
+
+.gallery-container > div > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.horizontal { 
+  grid-column: span 2;
+}
+
+.vertical { 
+  grid-row: span 2;
+}
+
+.big { 
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.contact-section {
+  background-color: #f888aa;
+  color: #fff;
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-section input {
+  width: 300px;
+  height: 40px;
+}
+
+.contact-section input[type="email"] {
+  width: 300px;
+  margin-right: 10px;
+}
+
+.contact-section input[type="submit"] {
+	padding: 0px;
+	font-size: 0.8em;
+	text-align: center;
+	width: 100px;
+  margin-bottom: 0px;
 }

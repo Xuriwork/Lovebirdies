@@ -1,0 +1,37 @@
+[debug] [2020-02-05T18:22:14.378Z] ----------------------------------------------------------------------
+[debug] [2020-02-05T18:22:14.380Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\xxeno\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2020-02-05T18:22:14.381Z] CLI Version:   7.12.1
+[debug] [2020-02-05T18:22:14.381Z] Platform:      win32
+[debug] [2020-02-05T18:22:14.381Z] Node Version:  v10.16.3
+[debug] [2020-02-05T18:22:14.381Z] Time:          Wed Feb 05 2020 13:22:14 GMT-0500 (GMT-05:00)
+[debug] [2020-02-05T18:22:14.381Z] ----------------------------------------------------------------------
+[debug] [2020-02-05T18:22:14.381Z] 
+[debug] [2020-02-05T18:22:14.390Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-02-05T18:22:14.390Z] > authorizing via signed-in user
+[debug] [2020-02-05T18:22:14.390Z] [iam] checking project lovebirds-demo for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-02-05T18:22:14.392Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-02-05T18:22:14.392Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-02-05T18:22:14.573Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-05T18:22:14.578Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/lovebirds-demo:testIamPermissions  
+
+[debug] [2020-02-05T18:22:14.796Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-05T18:22:14.797Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects/lovebirds-demo  
+ 
+[debug] [2020-02-05T18:22:15.019Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'lovebirds-demo'...
+[info] 
+[info] i  deploying hosting
+[debug] [2020-02-05T18:22:15.044Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/lovebirds-demo/versions  
+
+[debug] [2020-02-05T18:22:15.679Z] <<< HTTP RESPONSE 200
+[info] i  hosting[lovebirds-demo]: beginning deploy...
+[info] i  hosting[lovebirds-demo]: found 34 files in build
+[debug] [2020-02-05T18:22:16.284Z] [hosting] hash cache [YnVpbGQ] stored for 34 files
+[debug] [2020-02-05T18:22:16.284Z] [hosting][hash queue][FINAL]
+[debug] [2020-02-05T18:22:16.284Z] >>> HTTP REQUEST POST https://firebasehosting.googleapis.com/v1beta1/sites/lovebirds-demo/versions/33a4eccc8164c4a2:populateFiles  
+ <request body omitted>
+[debug] [2020-02-05T18:22:16.698Z] <<< HTTP RESPONSE 200
+[debug] [2020-02-05T18:22:16.706Z] [hosting][populate queue][FINAL]
+[debug] [2020-02-05T18:22:16.706Z] [hosting] uploads queued: 18
