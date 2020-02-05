@@ -17,7 +17,7 @@ constructor(props) {
 
     componentDidMount() {
        firebase.auth().onAuthStateChanged((user) => {
-        console.log(firebase.auth().currentUser.uid)
+        this.setState({ photoURL: user.photoURL })
        })
     }
 
@@ -61,6 +61,11 @@ constructor(props) {
       fileInput.click();
   }
 
+  check = (e) => {
+      e.preventDefault();
+      console.log(this.state.photoURL);
+  }
+
     render() {
 
         const { userInfo } = this.props;
@@ -72,8 +77,8 @@ constructor(props) {
                        
                         {
                             this.state.photoURL == null ? (
-                            <img src={userInfo.photoURL} alt="Profile" />
-                            ) : <img src={ProfilePlaceHolder} alt="Profile" />    
+                            <img src={ProfilePlaceHolder} alt="Profile" />  
+                            ) : <img src={userInfo.photoURL} alt="Profile" />    
                         }
                         <FileUploader
                             accept="image/*"

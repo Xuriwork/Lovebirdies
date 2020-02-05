@@ -12,16 +12,16 @@ import eight from '../assets/images/Gallery/man-wearing-t-shirt-1587646.jpg';
 export class Gallery extends Component {
     render() {
         return (
-            <div class="gallery-section">
-                <div class="gallery-container">
-                    <div class="horizontal"><img src={one} alt="Happy man and woman" /></div>
+            <div className="gallery-section">
+                <div className="gallery-container">
+                    <div className="horizontal"><img src={one} alt="Happy man and woman" /></div>
                     <div><img src={two} alt="Happy man and woman" /></div>
                     <div><img src={three} alt="Happy man and woman" /></div>
-                    <div class="vertical"><img src={four} alt="Happy man and woman" /></div>
-                    <div class="vertical"><img src={five} alt="Happy man and woman" /></div>
+                    <div className="vertical"><img src={four} alt="Happy man and woman" /></div>
+                    <div className="vertical"><img src={five} alt="Happy man and woman" /></div>
                     <div><img src={six} alt="Happy man and woman" /></div>
                     <div><img src={seven} alt="Happy man and woman" /></div>
-                    <div class="horizontal"><img src={eight} alt="Happy man and woman" /></div>
+                    <div className="horizontal"><img src={eight} alt="Happy man and woman" /></div>
                 </div>
             </div>
         )
