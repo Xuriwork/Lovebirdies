@@ -6,9 +6,6 @@ export class FormPage2 extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        security1: '',
-        security2: '',
-        security3: '',
         questionVals: [null, null, null],
         filterOptions: [
             {
@@ -55,13 +52,19 @@ constructor(props) {
     continue = e => {
         e.preventDefault();
         const { values } = this.props;
-        if (values.security1 === '' && values.security2 === '' && values.security3 === '') {
-            this.setState({ errorMessage: 'Select all fields' });
-        } else {
+        if (
+            values.security1 !== null 
+            && values.security1_answer !== null 
+            && values.security2 !== null 
+            && values.security2_answer !== null 
+            && values.security3 !== null 
+            && values.security3_answer !== null) 
+            {
             this.setState({ errorMessage: null })
             this.props.nextStep();
+        } else {
+            this.setState({ errorMessage: 'Complete all fields' });
         }
-        
     };
 
     back = e => {
@@ -105,7 +108,7 @@ constructor(props) {
                             options={this.getAvailableOptions()}
                             onChange={security1 => { 
                                 this.handleQuestionValChange(security1, 0);
-                                this.setState({security1: security1.label});
+                                this.setState({security1: security1.value});
                                 this.setState(handleChangeForSelect('security1'));
                             }}
                         />

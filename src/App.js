@@ -31,12 +31,12 @@ constructor(props) {
         phone_number: '',
         home_address: '',
         birthdate: '',
-        security1: '',
-        security2: '',
-        security3: '',
-        security1_answer: '',
-        security2_answer: '',
-        security3_answer: '',
+        security1: null,
+        security1_answer: null,
+        security2: null,
+        security2_answer: null,
+        security3: null,
+        security3_answer: null,
     }
 }
 
