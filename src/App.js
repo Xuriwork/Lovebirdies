@@ -20,7 +20,8 @@ constructor(props) {
         errorMessage: null, 
         userInfo: [],
         userID: null,
-        user: null,
+        user: null, 
+        photoURL: null,
         name: '',
         email: '', 
         password: '',
@@ -52,17 +53,20 @@ componentDidMount() {
                 phone_number: userData.phone_number,
                 home_address: userData.home_address,
                 birthdate: userData.birthdate,
-                security1: userData.security1,
-                security2: userData.security2,
-                security3: userData.security3,
-                photoURL: userData.photoURL,
+                security1: userData.security1.label,
+                security2: userData.security2.label,
+                security3: userData.security3.label,
+                photoURL: user.photoURL,
             };
 
             this.setState({
               userInfo: userInfo,
-              user: firebase.auth().currentUser.uid,
+              user: firebase.auth().currentUser.displayName,
               photoURL: user.photoURL,
           });
+          console.log(user);
+          console.log(snapshot);
+          console.log(userData);
         })
         .catch((err) => console.log(err))
         } else {

@@ -26,16 +26,18 @@ constructor(props) {
         .then((user) => {
 
             const userInfo = {
-                userID: user.uid,
                 name: values.name,
                 email: values.email,
                 phone_number: values.phone_number,
                 home_address: values.home_address,
                 birthdate: values.birthdate,
-                security1: values.security1,
-                security2: values.security2,
-                security3: values.security3
+                security1: values.security1.questionVals[0],
+                security2: values.security2.questionVals[1],
+                security3: values.security3.questionVals[2],
             };
+            user.user.updateProfile({
+                displayName: values.name
+            })
             
             console.log('Email: ' + values.email + ' Password: ' + values.password);
             console.log("Sign Up Success!");
@@ -120,17 +122,17 @@ constructor(props) {
                         <label htmlFor="security1">Security Question #1</label>
                         <input 
                             disabled
-                            defaultValue={values.security1.label}
+                            defaultValue={values.security1.security1}
                         />  
                         <label htmlFor="security2">Security Question #2</label>
                         <input 
                             disabled
-                            defaultValue={values.security2.label}
+                            defaultValue={values.security2.security2}
                         />  
                         <label htmlFor="security3">Security Question #3</label>
                         <input 
                             disabled
-                            defaultValue={values.security3.label}
+                            defaultValue={values.security3.security3}
                         />  
                     </fieldset>
                     <input 

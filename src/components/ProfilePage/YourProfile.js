@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../../Firebase';
+import FileUploader from "react-firebase-file-uploader";
 import ProfilePlaceHolder from '../../assets/images/icons/user_profile_picture.svg';
 import FormError from '../FormPages/FormError';
 
@@ -9,8 +10,16 @@ constructor(props) {
     this.state = {
         new_password: '',
         new_password_confirm: '',
+        photoURL: null,
+        photo: '',
     }
 }
+
+    componentDidMount() {
+       firebase.auth().onAuthStateChanged((user) => {
+        console.log(firebase.auth().currentUser.uid)
+       })
+    }
 
     handleChange = input => e => {
         this.setState({ [input]: e.target.value }, () => {
@@ -33,6 +42,25 @@ constructor(props) {
         });
     }
 
+  uploadProfilePicture = filename => {
+    firebase
+      .storage()
+      .ref("user_profile_pictures")
+      .child(filename)
+      .getDownloadURL()
+      .then(url => 
+        firebase.auth().currentUser.updateProfile({
+            photoURL: url
+        })
+      );
+  };
+
+  changeProfilePicture = e => {
+      e.preventDefault();
+      const fileInput = document.getElementById('imageInput');
+      fileInput.click();
+  }
+
     render() {
 
         const { userInfo } = this.props;
@@ -41,8 +69,23 @@ constructor(props) {
             <div className="profile-page">
                 <form className="profile-form">
                     <div>
-                        <img src={ProfilePlaceHolder} alt="Profile" /> 
-                        <button>Upload</button> 
+                       
+                        {
+                            this.state.photoURL == null ? (
+                            <img src={userInfo.photoURL} alt="Profile" />
+                            ) : <img src={ProfilePlaceHolder} alt="Profile" />    
+                        }
+                        <FileUploader
+                            accept="image/*"
+                            name="photo"
+                            randomizeFilename
+                            storageRef={firebase.storage().ref("user_profile_pictures")}
+                            onUploadSuccess={this.uploadProfilePicture} 
+                            id="imageInput" 
+                            hidden="hidden"
+                            
+                        /> 
+                        <button onClick={this.changeProfilePicture}>Change Profile Picture</button>
                         <span style={{ marginTop: '10px' }}>Profile Created On :</span>
                         <span 
                             style={{ 
@@ -139,7 +182,7 @@ constructor(props) {
                             placeholder="Confirm New Password" 
                             onChange={this.handleChange('new_password_confirm')}
                         />  
-                        <button>Change Password</button>
+                        <button onClick={this.changePassword}>Change Password</button>
                     </div>
                 </form>
             </div>

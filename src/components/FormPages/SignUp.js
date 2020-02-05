@@ -30,7 +30,7 @@ constructor(props) {
 
     handleChange = input => e => {
         this.setState({ [input]: e.target.value }, () => {
-            if(this.state.password !== this.state.confirm_password) {
+            if (this.state.password !== this.state.confirm_password) {
                 this.setState({ errorMessage: 'Passwords do not match' });
             } else {
                 this.setState({ errorMessage: null })
@@ -80,7 +80,8 @@ constructor(props) {
                     <FormPage2 
                         nextStep={this.nextStep}
                         prevStep={this.prevStep} 
-                        handleChangeForSelect={this.handleChangeForSelect}
+                        handleChangeForSelect={this.handleChangeForSelect} 
+                        handleChange={this.handleChange}
                         values={values} 
                     />
                 )

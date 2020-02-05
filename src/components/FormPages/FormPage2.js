@@ -3,9 +3,8 @@ import Select from 'react-select';
 import FormError from './FormError';
 
 export class FormPage2 extends Component {
-
-  constructor() {
-    super();
+constructor(props) {
+    super(props);
     this.state = {
         security1: '',
         security2: '',
@@ -50,11 +49,19 @@ export class FormPage2 extends Component {
             }
         ]
         };
+
 }
 
     continue = e => {
         e.preventDefault();
-        this.props.nextStep();
+        const { values } = this.props;
+        if (values.security1 === '' && values.security2 === '' && values.security3 === '') {
+            this.setState({ errorMessage: 'Select all fields' });
+        } else {
+            this.setState({ errorMessage: null })
+            this.props.nextStep();
+        }
+        
     };
 
     back = e => {
@@ -72,11 +79,6 @@ export class FormPage2 extends Component {
         });
     };
 
-    handleChangeForSelect = valueOfSelect => e => {
-        this.setState({ [valueOfSelect]: e })
-        
-    }
-
   getAvailableOptions = () => {
     const availableOptionsLeft = this.state.filterOptions;
     return availableOptionsLeft.filter(questionOption => {
@@ -93,7 +95,7 @@ export class FormPage2 extends Component {
                 <form>
                     <fieldset>
                         <legend><span className="number">{values.step}</span> Registration</legend>
-                        <FormError errorMessage={values.errorMessage} /> 
+                        <FormError errorMessage={this.state.errorMessage} /> 
                         <label htmlFor="sq1">Security Question #1</label>
                         <Select
                             name="filters"
@@ -103,9 +105,8 @@ export class FormPage2 extends Component {
                             options={this.getAvailableOptions()}
                             onChange={security1 => { 
                                 this.handleQuestionValChange(security1, 0);
-                                this.setState({security1});
-                                handleChangeForSelect('security1');
-                                values.security1 = security1;
+                                this.setState({security1: security1.label});
+                                this.setState(handleChangeForSelect('security1'));
                             }}
                         />
                         <label htmlFor="sq2">Security Question #2</label>
@@ -117,24 +118,20 @@ export class FormPage2 extends Component {
                             options={this.getAvailableOptions()}
                             onChange={security2 => { 
                                 this.handleQuestionValChange(security2, 1);
-                                this.setState({security2});
-                                handleChangeForSelect('security2');
-                                values.security2 = security2;
+                                this.setState({security2: security2.value});
+                                this.setState(handleChangeForSelect('security2'));
                             }}
 
                         /> 
                         <label htmlFor="sq3">Security Question #3</label>
                         <Select
-                            name="filters"
                             placeholder="Question #3"
-                            value={this.state.questionVals[2]} 
-                            defaultValue={values.security3}
+                            value={this.state.questionVals[2]}  
                             options={this.getAvailableOptions()}
                             onChange={security3 => {
                                 this.handleQuestionValChange(security3, 2);
-                                this.setState({security3});
-                                handleChangeForSelect('security1');
-                                values.security3 = security3;
+                                this.setState({security3: security3.value});
+                                this.setState(handleChangeForSelect('security3'));
                             }}
                         />
                     </fieldset>
