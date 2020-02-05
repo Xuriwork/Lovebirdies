@@ -697,6 +697,7 @@ textarea,
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .contact-section input {
