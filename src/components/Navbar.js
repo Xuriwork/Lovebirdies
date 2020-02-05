@@ -9,11 +9,15 @@ import heartIcon from '../assets/images/icons/logo192.png';
 class Navbar extends Component {
 
     signOut = e => {
-        firebase.auth().signOut().then(() => {
-            navigate('/home');
-        }).catch((err) => {
-            console.log(err);
-        });
+        firebase
+            .auth()
+            .signOut()
+            .then(() => {
+                navigate('/home');
+                window.location.reload(false);
+            }).catch((err) => {
+                console.log(err);
+            });
     }
 
     render() {
