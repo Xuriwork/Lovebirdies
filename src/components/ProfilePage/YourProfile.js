@@ -148,24 +148,38 @@ constructor(props) {
                             max="2002-01-01" 
                             defaultValue={userInfo.birthdate}
                         /> 
+                        <div className="security-questions-section">
                         <label htmlFor="security1">Security Question #1</label>
                         <input 
                             disabled 
                             defaultValue={userInfo.security1}
                         />  
+                        <input 
+                            disabled 
+                            defaultValue={userInfo.security1_answer}
+                        />  
                         <label htmlFor="security2">Security Question #2</label>
                         <input 
                             disabled 
                             defaultValue={userInfo.security2}
+                        /> 
+                        <input 
+                            disabled 
+                            defaultValue={userInfo.security2_answer}
                         />  
                         <label htmlFor="security3">Security Question #3</label>
                         <input 
                             disabled 
                             defaultValue={userInfo.security3}
                         />  
+                        <input 
+                            disabled 
+                            defaultValue={userInfo.security3_answer}
+                        />  
+                        </div>
                         <button>Update</button>
                     </div>
-                    <div>
+                    <div className="test">
                         <FormError errorMessage={this.state.errorMessage} />
                         <label htmlFor="current_password">Current Password</label>
                         <input 

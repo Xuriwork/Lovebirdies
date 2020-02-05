@@ -20,8 +20,11 @@ constructor(props) {
         home_address: '',
         birthdate: '',
         security1: '',
+        security1_answer: '',
         security2: '',
+        security2_answer: '',
         security3: '',
+        security3_answer: '',
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -62,8 +65,8 @@ constructor(props) {
 
     render() {
         
-        const { step, errorMessage, userID, name, email, password, confirm_password, phone_number, home_address, birthdate, security1, security2, security3 } = this.state;
-        const values = { step, errorMessage, userID, name, email, password, confirm_password, phone_number, home_address, birthdate, security1, security2, security3 }
+        const { step, errorMessage, userID, name, email, password, confirm_password, phone_number, home_address, birthdate, security1, security1_answer, security2_answer, security2, security3, security3_answer } = this.state;
+        const values = { step, errorMessage, userID, name, email, password, confirm_password, phone_number, home_address, birthdate, security1, security1_answer, security2, security2_answer, security3, security3_answer }
        
         switch(step) {
             default: 

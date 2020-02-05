@@ -34,6 +34,9 @@ constructor(props) {
         security1: '',
         security2: '',
         security3: '',
+        security1_answer: '',
+        security2_answer: '',
+        security3_answer: '',
     }
 }
 
@@ -55,9 +58,12 @@ componentDidMount() {
                 phone_number: userData.phone_number,
                 home_address: userData.home_address,
                 birthdate: userData.birthdate,
-                security1: userData.security1.label,
-                security2: userData.security2.label,
-                security3: userData.security3.label,
+                security1: userData.security1[0].value,
+                security1_answer: userData.security1[1],
+                security2: userData.security1[0].value,
+                security2_answer: userData.security2[0].value,
+                security3: userData.security3[0].value,
+                security3_answer: userData.security3[1],
                 photoURL: user.photoURL,
             };
 

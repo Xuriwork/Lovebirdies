@@ -87,7 +87,7 @@ constructor(props) {
   };
 
   render() {
-      const { values, handleChangeForSelect } = this.props;
+      const { values, handleChangeForSelect, handleChange } = this.props;
 
     return (
         <div className="form-page-background">
@@ -97,7 +97,7 @@ constructor(props) {
                         <legend><span className="number">{values.step}</span> Registration</legend>
                         <FormError errorMessage={this.state.errorMessage} /> 
                         <label htmlFor="sq1">Security Question #1</label>
-                        <Select
+                        <Select 
                             name="filters"
                             placeholder="Question #1"
                             value={this.state.questionVals[0]}
@@ -109,8 +109,17 @@ constructor(props) {
                                 this.setState(handleChangeForSelect('security1'));
                             }}
                         />
-                        <label htmlFor="sq2">Security Question #2</label>
-                        <Select
+                        <input 
+                            required
+                            onChange={handleChange('security1_answer')} 
+                            defaultValue={values.security1_answer} 
+                            type="text" 
+                            name="security1_answer" 
+                            placeholder="Security 1 Answer" 
+                            style={{ margin: '6px 0' }}
+                        />
+                        <label htmlFor="sq2" style={{ marginTop: '15px' }}>Security Question #2</label>
+                        <Select 
                             name="filters"
                             placeholder="Question #2"
                             value={this.state.questionVals[1]}
@@ -120,9 +129,17 @@ constructor(props) {
                                 this.handleQuestionValChange(security2, 1);
                                 this.setState({security2: security2.value});
                                 this.setState(handleChangeForSelect('security2'));
-                            }}
-
+                            }} 
                         /> 
+                        <input 
+                            style={{ margin: '6px 0 15px 0' }}
+                            required
+                            onChange={handleChange('security2_answer')} 
+                            defaultValue={values.security2_answer} 
+                            type="text" 
+                            name="security2_answer" 
+                            placeholder="Security 2 Answer" 
+                        />
                         <label htmlFor="sq3">Security Question #3</label>
                         <Select
                             placeholder="Question #3"
@@ -133,6 +150,16 @@ constructor(props) {
                                 this.setState({security3: security3.value});
                                 this.setState(handleChangeForSelect('security3'));
                             }}
+                            
+                        />
+                        <input 
+                            required
+                            onChange={handleChange('security3_answer')} 
+                            defaultValue={values.security3_answer} 
+                            type="text" 
+                            name="security3_answer" 
+                            placeholder="Security 3 Answer" 
+                            style={{ margin: '6px 0' }}
                         />
                     </fieldset>
                     <input 

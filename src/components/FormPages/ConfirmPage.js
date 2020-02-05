@@ -31,9 +31,15 @@ constructor(props) {
                 phone_number: values.phone_number,
                 home_address: values.home_address,
                 birthdate: values.birthdate,
-                security1: values.security1.questionVals[0],
-                security2: values.security2.questionVals[1],
-                security3: values.security3.questionVals[2],
+                security1: [
+                    values.security1.questionVals[0],
+                    values.security1_answer],
+                security2: [
+                    values.security2.questionVals[1],
+                    values.security2_answer],
+                security3: [
+                    values.security3.questionVals[2],
+                    values.security3_answer],
             };
             user.user.updateProfile({
                 displayName: values.name
@@ -64,8 +70,8 @@ constructor(props) {
         
         return (
         <div className="form-page-background" style={{ height: 'auto', padding: '20px 0' }}>
-            <div className="form-box form-page-1" style={{ width: '500px' }}>
-                <form onSubmit={this.signUp}>
+            <div className="form-box form-page-1 input-margin" style={{ width: '500px' }}>
+                <form onSubmit={this.signUp} className="confirm-page-form">
                     <fieldset>
                         <legend><span className="number">{values.step}</span>Confirm Information</legend>
                         <FormError errorMessage={this.state.errorMessage} />
@@ -118,22 +124,34 @@ constructor(props) {
                             max="2002-01-01"
                         /> 
                     </fieldset>
-                    <fieldset>
+                    <fieldset className="input-margin-small">
                         <label htmlFor="security1">Security Question #1</label>
                         <input 
                             disabled
                             defaultValue={values.security1.security1}
                         />  
+                        <input 
+                            disabled
+                            defaultValue={values.security1_answer} 
+                        />
                         <label htmlFor="security2">Security Question #2</label>
                         <input 
                             disabled
                             defaultValue={values.security2.security2}
-                        />  
+                        /> 
+                        <input 
+                            disabled
+                            defaultValue={values.security2_answer} 
+                        />
                         <label htmlFor="security3">Security Question #3</label>
                         <input 
                             disabled
                             defaultValue={values.security3.security3}
-                        />  
+                        /> 
+                        <input 
+                            disabled
+                            defaultValue={values.security3_answer} 
+                        />
                     </fieldset>
                     <input 
                         onClick={this.back} 
