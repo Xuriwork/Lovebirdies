@@ -19,11 +19,11 @@ constructor(props) {
         phone_number: '',
         home_address: '',
         birthdate: '',
-        security1: null,
+        security1: '',
         security1_answer: null,
-        security2: null,
+        security2: '',
         security2_answer: null,
-        security3: null,
+        security3: '',
         security3_answer: null,
     }
 

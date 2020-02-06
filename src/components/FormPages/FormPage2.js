@@ -53,11 +53,11 @@ constructor(props) {
         e.preventDefault();
         const { values } = this.props;
         if (
-            values.security1 !== null 
+            values.security1 !== ''
             && values.security1_answer !== null 
-            && values.security2 !== null 
+            && values.security2 !== '' 
             && values.security2_answer !== null 
-            && values.security3 !== null 
+            && values.security3 !== '' 
             && values.security3_answer !== null) 
             {
             this.setState({ errorMessage: null })
@@ -101,10 +101,8 @@ constructor(props) {
                         <FormError errorMessage={this.state.errorMessage} /> 
                         <label htmlFor="sq1">Security Question #1</label>
                         <Select 
-                            name="filters"
-                            placeholder="Question #1"
+                            placeholder={values.security1.security1}
                             value={this.state.questionVals[0]}
-                            defaultValue={values.security1}
                             options={this.getAvailableOptions()}
                             onChange={security1 => { 
                                 this.handleQuestionValChange(security1, 0);
@@ -113,20 +111,18 @@ constructor(props) {
                             }}
                         />
                         <input 
-                            required
-                            onChange={handleChange('security1_answer')} 
-                            defaultValue={values.security1_answer} 
-                            type="text" 
+                            required 
                             name="security1_answer" 
+                            type="text" 
                             placeholder="Security 1 Answer" 
                             style={{ margin: '6px 0' }}
+                            onChange={handleChange('security1_answer')} 
+                            defaultValue={values.security1_answer} 
                         />
                         <label htmlFor="sq2" style={{ marginTop: '15px' }}>Security Question #2</label>
                         <Select 
-                            name="filters"
-                            placeholder="Question #2"
+                            placeholder={values.security2.security2}
                             value={this.state.questionVals[1]}
-                            defaultValue={values.security2}
                             options={this.getAvailableOptions()}
                             onChange={security2 => { 
                                 this.handleQuestionValChange(security2, 1);
@@ -135,17 +131,17 @@ constructor(props) {
                             }} 
                         /> 
                         <input 
-                            style={{ margin: '6px 0 15px 0' }}
                             required
-                            onChange={handleChange('security2_answer')} 
-                            defaultValue={values.security2_answer} 
-                            type="text" 
                             name="security2_answer" 
+                            type="text" 
                             placeholder="Security 2 Answer" 
+                            style={{ margin: '6px 0 15px 0' }}
+                            defaultValue={values.security2_answer} 
+                            onChange={handleChange('security2_answer')} 
                         />
                         <label htmlFor="sq3">Security Question #3</label>
-                        <Select
-                            placeholder="Question #3"
+                        <Select 
+                            placeholder={values.security2.security2}
                             value={this.state.questionVals[2]}  
                             options={this.getAvailableOptions()}
                             onChange={security3 => {
@@ -157,12 +153,12 @@ constructor(props) {
                         />
                         <input 
                             required
-                            onChange={handleChange('security3_answer')} 
-                            defaultValue={values.security3_answer} 
-                            type="text" 
                             name="security3_answer" 
+                            type="text" 
                             placeholder="Security 3 Answer" 
                             style={{ margin: '6px 0' }}
+                            onChange={handleChange('security3_answer')} 
+                            defaultValue={values.security3_answer} 
                         />
                     </fieldset>
                     <input 
