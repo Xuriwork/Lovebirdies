@@ -376,7 +376,7 @@ section {
 
 /* Main Media Queries */
 
-@media (max-width: 800px) {
+@media (max-width: 840px) {
 
   .hamburger {
     display: block;
