@@ -451,6 +451,12 @@ legend {
   background-color: #16d68a;
 }
 
+.success-message-box {
+  height: 100%;
+  text-align: center;
+  color: #fff;
+}
+
 .form-page-background {
   background-image: linear-gradient(to top, #fad0c4 0%, #ffd1ff 100%);
   height: 100vh;

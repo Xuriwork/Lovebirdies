@@ -3,6 +3,7 @@ import firebase from '../../Firebase';
 import FileUploader from "react-firebase-file-uploader";
 import ProfilePlaceHolder from '../../assets/images/icons/user_profile_picture.svg';
 import FormError from '../FormPages/FormError';
+import SuccessMessage from '../FormPages/SuccessMessage';
 
 export class YourProfile extends Component {
 constructor(props) {
@@ -12,7 +13,9 @@ constructor(props) {
         new_password_confirm: '',
         photoURL: null,
         photo: '',
+        successMessage: null,
     }
+    
 }
 
     async componentDidMount() {
@@ -36,9 +39,7 @@ constructor(props) {
                 new_home_address: userData.home_address,
                 new_birthdate: userData.birthdate,
           });
-          console.log(user);
-          console.log(snapshot);
-          console.log(userData);
+          
         })
         .catch((err) => console.log(err))
         } else {
@@ -112,7 +113,12 @@ constructor(props) {
             .doc(user.email)
             .update(new_userInfo)
             .then(() => {
-                console.log('Updated user info');
+                this.setState({ successMessage: 'Info successfully updated!' });
+                window.scrollTo(0, 0);
+                setTimeout(
+                function() {
+                    this.setState({successMessage: null})}
+                .bind(this), 4000);
             })
             .catch((err) => {
                 this.setState({ errorMessage: 'Firestore error: ' + err });
@@ -121,10 +127,12 @@ constructor(props) {
 
     render() {
 
+        const { successMessage } = this.state;
         const { userInfo } = this.props;
 
         return (
             <div className="profile-page">
+            <SuccessMessage successMessage={successMessage} />
                 <form className="profile-form">
                     <div>
                        
@@ -262,6 +270,7 @@ constructor(props) {
                     </div>
                 </form>
             </div>
+
         )
     }
 }

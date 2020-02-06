@@ -70,9 +70,7 @@ componentDidMount() {
               user: firebase.auth().currentUser.displayName,
               photoURL: user.photoURL,
           });
-          console.log(user);
-          console.log(snapshot);
-          console.log(userData);
+
         })
         .catch((err) => console.log(err))
         } else {

@@ -3,7 +3,6 @@ import '../../App.css';
 import FormPage1  from './FormPage1';
 import FormPage2 from './FormPage2';
 import ConfirmPage from './ConfirmPage';
-import SuccessPage from './SuccessPage';
 
 export class SignUp extends Component {
 constructor(props) {
@@ -95,11 +94,6 @@ constructor(props) {
                         prevStep={this.prevStep} 
                         values={values} 
                     />
-                )
-                case 4: 
-                    return ( 
-                    <SuccessPage />
-
                 )
         }
     }

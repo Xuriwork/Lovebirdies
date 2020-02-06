@@ -3,16 +3,6 @@ import { Link} from '@reach/router';
 
 export class SuccessPage extends Component {
 
-    back = e => {
-        e.preventDefault();
-        this.props.prevStep();
-    };
-
-    continue = e => {
-        e.preventDefault();
-        this.props.nextStep();
-    }; 
-
     render() {
         return (
             <div className="form-page-background success-page" style={{ height: '92vh' }}>
