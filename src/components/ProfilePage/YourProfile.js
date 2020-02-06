@@ -12,7 +12,6 @@ constructor(props) {
         new_password_confirm: '',
         photoURL: null,
         photo: '',
-        new_userInfo: [],
     }
 }
 
@@ -103,8 +102,8 @@ constructor(props) {
         const new_userInfo = {
             name: new_name,
             email: new_email,
-            phone_number: new_home_address,
-            home_address: new_phone_number,
+            phone_number: new_phone_number,
+            home_address: new_home_address,
             birthdate: new_birthdate,
         }
 
