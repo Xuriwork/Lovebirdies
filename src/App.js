@@ -18,8 +18,6 @@ class App extends Component {
 constructor(props) {
     super(props);
     this.state = {
-        step: 1,
-        errorMessage: null, 
         userInfo: [],
         userID: null,
         user: null, 

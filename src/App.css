@@ -413,15 +413,9 @@ section {
     font-size: 2em !important;
   }
 
-  .success-page p{
+  .success-page p {
     font-size: 1.2em !important;
   }
-
-  .profile-form {
-    display: flex;
-    flex-direction: column;
-  }
-
 }
 
 @media (max-width: 600px) {
@@ -729,11 +723,11 @@ textarea,
   margin-bottom: 0px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 880px) {
 
-.profile-form {
-  display: flex;
-  flex-direction: column;
-}
+  .profile-form {
+    display: flex;
+    flex-direction: column;
+  }
 
 }

@@ -7,18 +7,46 @@ import FormError from '../FormPages/FormError';
 export class YourProfile extends Component {
 constructor(props) {
     super(props);
-    this.state = {
+    this.state = { 
         new_password: '',
         new_password_confirm: '',
         photoURL: null,
         photo: '',
+        new_userInfo: [],
     }
 }
 
-    componentDidMount() {
-       firebase.auth().onAuthStateChanged((user) => {
-        this.setState({ photoURL: user.photoURL })
-       })
+    async componentDidMount() {
+        await firebase.auth().onAuthStateChanged((user) => {
+            this.setState({ photoURL: user.photoURL })
+        })
+
+        firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          firebase.firestore()
+          .collection('users')
+          .doc(user.email)
+          .get()
+          .then(snapshot => {
+            const userData = snapshot.data();
+
+            this.setState({
+                new_name: userData.name,
+                new_email: userData.email,
+                new_phone_number: userData.phone_number,
+                new_home_address: userData.home_address,
+                new_birthdate: userData.birthdate,
+          });
+          console.log(user);
+          console.log(snapshot);
+          console.log(userData);
+        })
+        .catch((err) => console.log(err))
+        } else {
+          // User not logged in or has just logged out.
+        }
+      });
+
     }
 
     handleChange = input => e => {
@@ -42,29 +70,55 @@ constructor(props) {
         });
     }
 
-  uploadProfilePicture = filename => {
-    firebase
-      .storage()
-      .ref("user_profile_pictures")
-      .child(filename)
-      .getDownloadURL()
-      .then(url => 
-        firebase.auth().currentUser.updateProfile({
-            photoURL: url
+    uploadProfilePicture = filename => {
+        firebase
+        .storage()
+        .ref("user_profile_pictures")
+        .child(filename)
+        .getDownloadURL()
+        .then(url => 
+            firebase.auth().currentUser.updateProfile({
+                photoURL: url
+            })
+        );
+    };
+
+    changeProfilePicture = e => {
+        e.preventDefault();
+        const fileInput = document.getElementById('imageInput');
+        fileInput.click();
+    }
+
+    handleChange = input => e => {
+        this.setState({ [input]: e.target.value }, () => {
         })
-      );
-  };
+    }
 
-  changeProfilePicture = e => {
-      e.preventDefault();
-      const fileInput = document.getElementById('imageInput');
-      fileInput.click();
-  }
+    updateUserInfo = e => {
+        e.preventDefault();
 
-  check = (e) => {
-      e.preventDefault();
-      console.log(this.state.photoURL);
-  }
+        const user = firebase.auth().currentUser;
+        const { new_name, new_email, new_home_address, new_phone_number, new_birthdate } = this.state;
+        
+        const new_userInfo = {
+            name: new_name,
+            email: new_email,
+            phone_number: new_home_address,
+            home_address: new_phone_number,
+            birthdate: new_birthdate,
+        }
+
+        firebase.firestore()
+            .collection('users')
+            .doc(user.email)
+            .update(new_userInfo)
+            .then(() => {
+                console.log('Updated user info');
+            })
+            .catch((err) => {
+                this.setState({ errorMessage: 'Firestore error: ' + err });
+            });
+    }
 
     render() {
 
@@ -118,35 +172,39 @@ constructor(props) {
                             name="name" 
                             placeholder="Your Name" 
                             defaultValue={userInfo.name}
-                            
+                            onChange={this.handleChange('new_name')}
                         />
                         <label>Your Email Address</label>
                         <input 
                             type="email" 
                             name="email" 
                             placeholder="Your Email Address" 
-                            defaultValue={userInfo.email}
+                            defaultValue={userInfo.email} 
+                            onChange={this.handleChange('new_email')}
                         /> 
                         <label>Phone Number</label>
                         <input 
                             type="number" 
                             name="phone_number" 
                             placeholder="Your Phone Number" 
-                            defaultValue={userInfo.phone_number}
+                            defaultValue={userInfo.phone_number} 
+                            onChange={this.handleChange('new_phone_number')}
                         /> 
                         <label>Home Address</label>
                         <input 
                             type="text" 
                             name="home_address" 
                             placeholder="Your Home Address" 
-                            defaultValue={userInfo.home_address}
+                            defaultValue={userInfo.home_address} 
+                            onChange={this.handleChange('new_home_address')}
                         /> 
                         <label>Birthdate</label>
                         <input 
                             type="date" 
                             name="birthdate" 
                             max="2002-01-01" 
-                            defaultValue={userInfo.birthdate}
+                            defaultValue={userInfo.birthdate} 
+                            onChange={this.handleChange('new_birthdate')}
                         /> 
                         <div className="security-questions-section">
                         <label htmlFor="security1">Security Question #1</label>
@@ -177,7 +235,7 @@ constructor(props) {
                             defaultValue={userInfo.security3_answer}
                         />  
                         </div>
-                        <button>Update</button>
+                        <button onClick={this.updateUserInfo}>Update</button>
                     </div>
                     <div className="test">
                         <FormError errorMessage={this.state.errorMessage} />
