@@ -1,19 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-export class SuccessMessage extends Component {
-    render() {
-        const { successMessage } = this.props;
-
-        return (
-            
-            successMessage !== null ? (
-                <div className="success-message success-message-box">
-                    <h1 style={{ fontSize: '1.5em' }}>{successMessage}</h1>
-                </div>
-                ) : null  
-        )
-    }
-
-}
+const SuccessMessage = (props) => (
+    props.successMessage !== null ? (
+        <div className="success-message-box">
+            <span style={{ fontSize: '1.5em' }}>{props.successMessage}</span>
+        </div>
+    ) : null  
+)
 
 export default SuccessMessage;

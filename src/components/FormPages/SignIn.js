@@ -1,31 +1,20 @@
-import React, { Component } from 'react';
-import firebase from '../../Firebase';
+import React, { useState } from 'react';
+import firebase from '../../Firebase/Firebase';
+import { useForm } from 'react-hook-form';
 import { navigate } from '@reach/router';
 import '../../App.css';
 import FormError from './FormError';
 
-export class SignIn extends Component {
-constructor(props) {
-    super(props);
-    this.state = {
-        email: null,
-        password: '',
-        errorMessage: '',
-    }
+export const SignIn = () => {
+    const { register, handleSubmit } = useForm();
+    const [errorMessage, setErrorMessage] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null);
 
-    this.handleChange = this.handleChange.bind(this);
-}
+    const signIn = values => {
 
-    handleChange = input => e => {
-        this.setState({ [input]: e.target.value }, () => {
-        })
-    }
-
-    signIn = e => {
-        e.preventDefault();
         firebase
         .auth()
-        .signInWithEmailAndPassword(this.state.email, this.state.password)
+        .signInWithEmailAndPassword(values.email, values.password)
         .then(() => {
             console.log('Added user info to the Firestore Database');
         })
@@ -33,63 +22,52 @@ constructor(props) {
             navigate('/profile');
         })
         .catch((err) => {
-            this.setState({ errorMessage: err.message });
+            setErrorMessage(err.message);
         });
     }
 
-    forgotPassword = e => {
-        if (this.state.email == null) {
-            this.setState({ errorMessage: 'Enter your email address first' });
+    const forgotPassword = values => {
+        if (values.email == null) {
+            setErrorMessage('Enter your email address first');
         } 
         
-        const email = this.state.email;
-
-        console.log(email);
         firebase
         .auth()
-        .sendPasswordResetEmail(email)
+        .sendPasswordResetEmail(values.email)
         .then(() => {
-            this.setState({ successMessage: 'Email has been sent' });
+            setSuccessMessage('Email has been sent');
         })
         .catch(() => {
-            this.setState({ errorMessage: 'Email did not send' });
+            setErrorMessage('Email did not send');
         });
     }
-
-    render() {
-        const { errorMessage, successMessage } = this.state;
 
         return (
         <div className="form-page-background">
             <div className="form-box form-page-1 input-margin">
-                <form>
+                <form onSubmit={handleSubmit(signIn)}>
                     <fieldset>
                     <FormError errorMessage={errorMessage} successMessage={successMessage} />
                         <legend>Sign In</legend>
                         <input 
-                            required
-                            onChange={this.handleChange('email')} 
-                            defaultValue={this.email} 
                             type="email" 
                             name="email" 
-                            placeholder="Your Email *"
+                            placeholder="Your Email *" 
+                            ref={register}
                         />
                         <input 
-                            required
-                            onChange={this.handleChange('password')} 
-                            defaultValue={this.password} 
                             type="password" 
                             name="password" 
-                            placeholder="Password *"
+                            placeholder="Password *" 
+                            ref={register}
                         />
                     </fieldset>
-                    <input type="submit" value="Sign In" onClick={this.signIn} />
-                    <span style={{ color: '#fc5185' }} onClick={this.forgotPassword}>Forgot Password?</span>
+                    <input type="submit" value="Sign In" onClick={handleSubmit(signIn)} />
+                    <span style={{ color: '#fc5185' }} onClick={handleSubmit(forgotPassword)}>Forgot Password?</span>
                 </form>
                 </div>
         </div>
         )
-    }
 }
 
 

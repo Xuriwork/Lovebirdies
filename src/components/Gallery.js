@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import one from '../assets/images/Gallery/blur-carefree-cute-feelings-289237.jpg';
 import two from '../assets/images/Gallery/brown-leather-zip-up-jacket-984908.jpg';
@@ -9,23 +9,19 @@ import six from '../assets/images/Gallery/selective-focus-photography-of-man-and
 import seven from '../assets/images/Gallery/man-standing-in-front-of-woman-in-white-wedding-dress-3014856.jpg';
 import eight from '../assets/images/Gallery/man-wearing-t-shirt-1587646.jpg';
 
-export class Gallery extends Component {
-    render() {
-        return (
-            <div className="gallery-section">
-                <div className="gallery-container">
-                    <div className="horizontal"><img src={one} alt="Happy man and woman" /></div>
-                    <div><img src={two} alt="Happy man and woman" /></div>
-                    <div><img src={three} alt="Happy man and woman" /></div>
-                    <div className="vertical"><img src={four} alt="Happy man and woman" /></div>
-                    <div className="vertical"><img src={five} alt="Happy man and woman" /></div>
-                    <div><img src={six} alt="Happy man and woman" /></div>
-                    <div><img src={seven} alt="Happy man and woman" /></div>
-                    <div className="horizontal"><img src={eight} alt="Happy man and woman" /></div>
-                </div>
-            </div>
-        )
-    }
-}
+const Gallery = () => (
+    <div className="gallery-section">
+        <div className="gallery-container">
+            <div className="horizontal"><img src={one} alt="Happy man and woman" /></div>
+            <div><img src={two} alt="Happy man and woman" /></div>
+            <div><img src={three} alt="Happy man and woman" /></div>
+            <div className="vertical"><img src={four} alt="Happy man and woman" /></div>
+            <div className="vertical"><img src={five} alt="Happy man and woman" /></div>
+            <div><img src={six} alt="Happy man and woman" /></div>
+            <div><img src={seven} alt="Happy man and woman" /></div>
+            <div className="horizontal"><img src={eight} alt="Happy man and woman" /></div>
+        </div>
+    </div>
+)
 
 export default Gallery;

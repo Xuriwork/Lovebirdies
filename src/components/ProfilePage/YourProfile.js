@@ -1,143 +1,90 @@
-import React, { Component } from 'react';
-import firebase from '../../Firebase';
+import React, { useState, useContext, useRef } from 'react';
+import { Redirect } from '@reach/router';
+import { useForm } from 'react-hook-form';
+import firebase from '../../Firebase/Firebase';
 import FileUploader from "react-firebase-file-uploader";
 import ProfilePlaceHolder from '../../assets/images/icons/user_profile_picture.svg';
 import FormError from '../FormPages/FormError';
 import SuccessMessage from '../FormPages/SuccessMessage';
+import { AuthContext } from '../../Firebase/firebaseAuth';
 
-export class YourProfile extends Component {
-constructor(props) {
-    super(props);
-    this.state = { 
-        new_password: '',
-        new_password_confirm: '',
-        photoURL: null,
-        photo: '',
-        successMessage: null,
-    }
+const YourProfile = () => {
+
+    const {userInfo, currentUser } = useContext(AuthContext);
     
-}
+    const { handleSubmit, register, errors, watch } = useForm();
+    const new_password = useRef({});
+    new_password.current = watch("new_password", "");
 
-    async componentDidMount() {
-        await firebase.auth().onAuthStateChanged((user) => {
-            this.setState({ photoURL: user.photoURL })
-        })
+    const [successMessage, setSuccessMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
 
-        firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          firebase.firestore()
-          .collection('users')
-          .doc(user.email)
-          .get()
-          .then(snapshot => {
-            const userData = snapshot.data();
-
-            this.setState({
-                new_name: userData.name,
-                new_email: userData.email,
-                new_phone_number: userData.phone_number,
-                new_home_address: userData.home_address,
-                new_birthdate: userData.birthdate,
-          });
-          
-        })
-        .catch((err) => console.log(err))
-        } else {
-          // User not logged in or has just logged out.
-        }
-      });
-
-    }
-
-    handleChange = input => e => {
-        this.setState({ [input]: e.target.value }, () => {
-            if(this.state.new_password !== this.state.new_password_confirm) {
-                this.setState({ errorMessage: 'Passwords do not match' });
-            } else {
-                this.setState({ errorMessage: null })
-            }
-        })
-    }
-
-    changePassword = e => {
-        e.preventDefault();
-        const new_password = this.handleChange('new_password').value;
-
-        firebase.auth().currentUser.updatePassword(new_password).then(function() {
-        // Update successful.
-        }).catch(function(error) {
-        // An error happened.
-        });
-    }
-
-    uploadProfilePicture = filename => {
+    const uploadProfilePicture = filename => {
         firebase
         .storage()
         .ref("user_profile_pictures")
         .child(filename)
         .getDownloadURL()
         .then(url => 
-            firebase.auth().currentUser.updateProfile({
+            firebase.auth().userInfo.updateProfile({
                 photoURL: url
             })
         );
     };
 
-    changeProfilePicture = e => {
+    const changeProfilePicture = e => {
         e.preventDefault();
         const fileInput = document.getElementById('imageInput');
         fileInput.click();
     }
+    
+    const changePassword = values => {
 
-    handleChange = input => e => {
-        this.setState({ [input]: e.target.value }, () => {
+        firebase
+            .auth()
+            .currentUser
+            .updatePassword(values.new_password)
+            .then(() => {
+                setSuccessMessage('Password Successful updated!');
+                window.scrollTo(0, 0);
+                setTimeout(() => {setSuccessMessage(null)}, 4000);
         })
+        .catch((error) => {
+            console.log(error.message)
+            setErrorMessage(error.message);
+        });
     }
 
-    updateUserInfo = e => {
-        e.preventDefault();
+    const updateUserInfo = values => {
 
-        const user = firebase.auth().currentUser;
-        const { new_name, new_email, new_home_address, new_phone_number, new_birthdate } = this.state;
-        
         const new_userInfo = {
-            name: new_name,
-            email: new_email,
-            phone_number: new_phone_number,
-            home_address: new_home_address,
-            birthdate: new_birthdate,
+            name: values.name,
+            email: values.email,
+            phone_number: values.phone_number,
+            home_address: values.home_address,
+            birthdate: values.birthdate,
         }
 
         firebase.firestore()
             .collection('users')
-            .doc(user.email)
+            .doc(userInfo.email)
             .update(new_userInfo)
             .then(() => {
-                this.setState({ successMessage: 'Info successfully updated!' });
+                setSuccessMessage('Info successfully updated!');
                 window.scrollTo(0, 0);
-                setTimeout(
-                function() {
-                    this.setState({successMessage: null})}
-                .bind(this), 4000);
-            })
-            .catch((err) => {
-                this.setState({ errorMessage: 'Firestore error: ' + err });
+                setTimeout(() => {setSuccessMessage(null)}, 4000);})
+            .catch((error) => {
+                setErrorMessage(error);
             });
     }
-
-    render() {
-
-        const { successMessage } = this.state;
-        const { userInfo } = this.props;
 
         return (
             <div className="profile-page">
             <SuccessMessage successMessage={successMessage} />
-                <form className="profile-form">
-                    <div>
-                       
+                <div className="profile-form">
+                    <form>
                         {
-                            this.state.photoURL == null ? (
+                            currentUser == null ? (
                             <img src={ProfilePlaceHolder} alt="Profile" />  
                             ) : <img src={userInfo.photoURL} alt="Profile" />    
                         }
@@ -146,12 +93,12 @@ constructor(props) {
                             name="photo"
                             randomizeFilename
                             storageRef={firebase.storage().ref("user_profile_pictures")}
-                            onUploadSuccess={this.uploadProfilePicture} 
+                            onUploadSuccess={uploadProfilePicture} 
                             id="imageInput" 
                             hidden="hidden"
                             
                         /> 
-                        <button onClick={this.changeProfilePicture}>Change Profile Picture</button>
+                        <button onClick={changeProfilePicture}>Change Profile Picture</button>
                         <span style={{ marginTop: '10px' }}>Profile Created On :</span>
                         <span 
                             style={{ 
@@ -159,7 +106,7 @@ constructor(props) {
                                 color: '#caa5f1', 
                                 marginBottom: '10px'
                             }}>
-                            {userInfo.creationTime}
+
                         </span>
                         <textarea 
                             placeholder="Status" 
@@ -171,15 +118,15 @@ constructor(props) {
                                 margin: '0',
                                 }}
                         />
-                    </div>
-                    <div>
+                    </form>
+                    <form onSubmit={handleSubmit(updateUserInfo)}>
                         <label>Name</label>
                         <input     
                             type="text" 
                             name="name" 
                             placeholder="Your Name" 
-                            defaultValue={userInfo.name}
-                            onChange={this.handleChange('new_name')}
+                            defaultValue={userInfo.name} 
+                            ref={register}
                         />
                         <label>Your Email Address</label>
                         <input 
@@ -187,7 +134,7 @@ constructor(props) {
                             name="email" 
                             placeholder="Your Email Address" 
                             defaultValue={userInfo.email} 
-                            onChange={this.handleChange('new_email')}
+                            ref={register}
                         /> 
                         <label>Phone Number</label>
                         <input 
@@ -195,7 +142,7 @@ constructor(props) {
                             name="phone_number" 
                             placeholder="Your Phone Number" 
                             defaultValue={userInfo.phone_number} 
-                            onChange={this.handleChange('new_phone_number')}
+                            ref={register}
                         /> 
                         <label>Home Address</label>
                         <input 
@@ -203,7 +150,7 @@ constructor(props) {
                             name="home_address" 
                             placeholder="Your Home Address" 
                             defaultValue={userInfo.home_address} 
-                            onChange={this.handleChange('new_home_address')}
+                            ref={register}
                         /> 
                         <label>Birthdate</label>
                         <input 
@@ -211,41 +158,43 @@ constructor(props) {
                             name="birthdate" 
                             max="2002-01-01" 
                             defaultValue={userInfo.birthdate} 
-                            onChange={this.handleChange('new_birthdate')}
+                            ref={register}
                         /> 
                         <div className="security-questions-section">
-                        <label htmlFor="security1">Security Question #1</label>
-                        <input 
-                            disabled 
-                            defaultValue={userInfo.security1}
-                        />  
-                        <input 
-                            disabled 
-                            defaultValue={userInfo.security1_answer}
-                        />  
-                        <label htmlFor="security2">Security Question #2</label>
-                        <input 
-                            disabled 
-                            defaultValue={userInfo.security2}
-                        /> 
-                        <input 
-                            disabled 
-                            defaultValue={userInfo.security2_answer}
-                        />  
-                        <label htmlFor="security3">Security Question #3</label>
-                        <input 
-                            disabled 
-                            defaultValue={userInfo.security3}
-                        />  
-                        <input 
-                            disabled 
-                            defaultValue={userInfo.security3_answer}
-                        />  
+                            <label htmlFor="security1">Security Question #1</label>
+                            <input 
+                                disabled 
+                                defaultValue={userInfo.security1} 
+                            />  
+                            <input 
+                                disabled 
+                                defaultValue={userInfo.security1_answer}
+                            />  
+                            <label htmlFor="security2">Security Question #2</label>
+                            <input 
+                                disabled 
+                                defaultValue={userInfo.security2}
+                            /> 
+                            <input 
+                                disabled 
+                                defaultValue={userInfo.security2_answer}
+                            />  
+                            <label htmlFor="security3">Security Question #3</label>
+                            <input 
+                                disabled 
+                                defaultValue={userInfo.security3}
+                            />  
+                            <input 
+                                disabled 
+                                defaultValue={userInfo.security3_answer}
+                            />  
+                            <button>Update Profile</button>
                         </div>
-                        <button onClick={this.updateUserInfo}>Update</button>
-                    </div>
-                    <div className="test">
-                        <FormError errorMessage={this.state.errorMessage} />
+                    </form>
+
+                    <form className="test" onSubmit={handleSubmit(changePassword)}>
+                        <FormError errorMessage={errorMessage} />
+                        {errors.new_password_confirm && <p className='error-message'>{errors.new_password_confirm.message}</p>}
                         <label htmlFor="current_password">Current Password</label>
                         <input 
                             type="password" 
@@ -257,22 +206,25 @@ constructor(props) {
                             type="password" 
                             name="new_password" 
                             placeholder="New Password" 
-                            onChange={this.handleChange('new_password')}
+                            ref={register({ required: true })}
                         />  
-                        <label htmlFor="new_password">New Password</label>
+                        <label htmlFor="new_password">Confirm New Password</label>
                         <input 
                             type="password" 
                             name="new_password_confirm" 
                             placeholder="Confirm New Password" 
-                            onChange={this.handleChange('new_password_confirm')}
+                            ref={register({ 
+                                required: true,
+                                validate: (value) => 
+                                    value === new_password.current || 'Passwords do not match'
+                            })}
                         />  
-                        <button onClick={this.changePassword}>Change Password</button>
-                    </div>
-                </form>
+                        <button>Change Password</button>
+                    </form>
+                </div>
             </div>
 
         )
     }
-}
 
 export default YourProfile;

@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Varela+Round|Bowlby+One+SC|Courgette|Fredoka+One|Francois+One|Lato&display=swap');
-* { list-style-type: none; padding: 0; margin: 0; box-sizing: border-box; text-decoration: none; }
+* { list-style-type: none; padding: 0; margin: 0; box-sizing: border-box; text-decoration: none  !important; }
 
 body {
   font-family: "Varela Round";
@@ -11,10 +11,7 @@ body {
   background-color: #fc85ae;
   color: #fff;
   display: flex;
-  justify-content: center;
-  justify-items: center;
   align-items: center;
-  align-content: center;
   padding: 30px 5%;
 }
 
@@ -27,12 +24,6 @@ nav {
   cursor: pointer;
   margin-right: auto;
   width: 50px;
-}
-
-.overlay-content a {
-  font-weight: 500;
-  color: #edf0f1;
-  text-decoration: none;
 }
 
 .nav-links {
@@ -82,43 +73,29 @@ header span:hover {
   color: #fff;
 }
 
-/* Mobile Nav */
-
-.menu {
-  display: none;
-}
-
-.overlay {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
-  background-color: #24252a;
-  overflow-x: hidden;
-  transition: all 0.5s ease 0s;
-}
-
-#mobile-menu {
-  width: 0;
-}
-
 .overlay-content {
   display: flex;
   height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: #e73e71;
+  font-size: 2em;
 }
 
-.overlay a {
-  padding: 15px;
-  font-size: 36px;
-  display: block;
-  transition: all 0.3s ease 0s;
+
+.overlay-content a {
+  text-decoration: none;
+  color: #a33ee7;
 }
 
+.overlay-content a:hover {
+  color: #a33ee7;
+}
+
+.overlay-content span:hover {
+  cursor: pointer;
+}
 
 .overlay .close {
   position: absolute;
@@ -127,8 +104,6 @@ header span:hover {
   font-size: 60px;
   color: #edf0f1;
 }
-
-/* Media Queries for Overlay */
 
 @media screen and (max-height: 450px) {
   .overlay a {
@@ -447,11 +422,8 @@ legend {
   margin-bottom: 20px !important;
 }
 
-.success-message {
-  background-color: #16d68a;
-}
-
 .success-message-box {
+  background-color: #16d68a;
   height: 100%;
   text-align: center;
   color: #fff;
@@ -622,7 +594,7 @@ textarea,
   margin: 5px;
 }
 
-.profile-form > div {
+.profile-form > form {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -641,6 +613,11 @@ textarea,
 .profile-form input {
   width: 80%;
   max-width: auto;
+}
+
+.profile-form label{
+  margin: 0;
+  margin-top: 12px;
 }
 
 .profile-form img {

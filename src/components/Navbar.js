@@ -1,18 +1,24 @@
-import React, { Component } from 'react';
-import firebase from '../Firebase';
+import React, { useContext, useState } from 'react';
+import firebase from '../Firebase/Firebase';
 import { navigate } from '@reach/router';
 import { Link } from '@reach/router';
 import '../App.css';
 import Hamburger from '../assets/images/icons/icons8-menu.svg';
 import heartIcon from '../assets/images/icons/logo192.png';
+import CheeseburgerMenu from 'cheeseburger-menu';
 
-class Navbar extends Component {
+import { AuthContext } from '../Firebase/firebaseAuth';
 
-    signOut = e => {
+const Navbar = () => {
+    const { currentUser } = useContext(AuthContext);
+    const [menu, setMenu] = useState(false);
+
+    const signOut = e => {
         firebase
             .auth()
             .signOut()
             .then(() => {
+                setMenu(false)
                 navigate('/home');
                 window.location.reload(false);
             }).catch((err) => {
@@ -20,7 +26,13 @@ class Navbar extends Component {
             });
     }
 
-    render() {
+        const openMenu = () => {
+            setMenu(true)
+        }
+
+        const closeMenu = () => {
+            setMenu(false)
+        }
           
         return (
             <div>
@@ -37,30 +49,41 @@ class Navbar extends Component {
                             <li><span>Gallery</span></li>
                         </ul>
                     </nav>
-                    { this.props.user == null ? (
+                    { currentUser == null ? (
                     <React.Fragment>
                         <Link to="/signin" className="signin-button" style={{ marginLeft: 'auto' }}>Sign In</Link>
                         <Link to="/signup" className="signup-button">Sign Up</Link>
                     </React.Fragment>
                     ) : 
                     <React.Fragment>
-                        <button className="signup-button" style={{ marginLeft: 'auto' }} onClick={this.signOut}>Sign Out</button>
+                        <button className="signup-button" style={{ marginLeft: 'auto' }} onClick={signOut}>Sign Out</button>
                     </React.Fragment>
                     }
-                    <img src={Hamburger} className="hamburger" alt="Hamburger Menu" />
+                    <img src={Hamburger} className="hamburger" alt="Hamburger Menu" onClick={openMenu} />
                 </header>
-                <div id="mobile-menu" className="overlay">
-                    <span className="close">&times;</span>
-                    <div className="overlay-content">
-                        <span>About</span>
-                        <span>Blog</span>
-                        <span>Testimonials</span>
-                        <span>Gallery</span>
-                    </div>
-                </div>
+                    <CheeseburgerMenu
+                        isOpen={menu} 
+                        closeCallback={closeMenu}
+                        width={500} 
+                        backgroundColor={'#24252a'}
+                    >
+                        <div className='overlay-content'>
+                            <span>About</span>
+                            <span>Blog</span>
+                            <span>Testimonials</span>
+                            <span>Gallery</span>
+                            { currentUser == null ? (
+                            <>
+                                <Link to="/signin" onClick={closeMenu}>Sign In</Link>
+                                <Link to="/signup" onClick={closeMenu}>Sign Up</Link>
+                            </>
+                            ) : 
+                                <span onClick={signOut}>Sign Out</span>
+                            }
+                        </div>
+                    </CheeseburgerMenu>
             </div>
         )
     }
-}
 
 export default Navbar;
